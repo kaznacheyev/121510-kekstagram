@@ -1,6 +1,6 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
-* Студент: [Yaroslav Kaznacheyev](https://up.htmlacademy.ru/javascript/4/user/121510).
+* Студент: `Ярослав Казначеев`.[Yaroslav Kaznacheyev](https://up.htmlacademy.ru/javascript/4/user/121510).
 * Наставник: `Руслан Галиев`.
 
 ---
