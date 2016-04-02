@@ -89,7 +89,7 @@
       // чего-либо с другой обводкой.
 
       // Толщина линии.
-      this._ctx.lineWidth = 6;
+      this._ctx.lineWidth = 4;
       // Цвет обводки.
       this._ctx.strokeStyle = '#ffe753';
       // Размер штрихов. Первый элемент массива задает длину штриха, второй
@@ -119,6 +119,32 @@
           (-this._resizeConstraint.side / 2) - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2,
           this._resizeConstraint.side - this._ctx.lineWidth / 2);
+
+      // зная координаты верхнего левого угла (displX, displY),
+      // правого нижнего (this._container.width, this._container.height), рисуем прямоуголник размером холста,
+      // далее второй прямоугольник с внутренней желтой рамкой, добавляем черный слой с прозрачностью 80%,
+      // изменил толщину пунктира до 4 для красоты,
+      // с помощью fillText() указываем над фото текст с различными свойствами
+      this._ctx.beginPath();
+      this._ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+      this._ctx.rect(displX, displY, this._container.width, this._container.height);
+      this._ctx.rect(
+        (-this._resizeConstraint.side / 2) - this._ctx.lineWidth,
+        (-this._resizeConstraint.side / 2) - this._ctx.lineWidth,
+        this._resizeConstraint.side + this._ctx.lineWidth / 2,
+        this._resizeConstraint.side + this._ctx.lineWidth / 2);
+      this._ctx.fill('evenodd');
+      this._ctx.closePath();
+
+
+      this._ctx.fillStyle = '#fff';
+      this._ctx.font = '16px Muller, Arial, sans-serif';
+      this._ctx.textAlign = 'center';
+      this._ctx.fillText(
+        this._image.naturalWidth + ' x ' + this._image.naturalHeight,
+        0,
+        (-this._resizeConstraint.side / 2) - this._ctx.lineWidth - 5);
+
 
       // Восстановление состояния канваса, которое было до вызова ctx.save
       // и последующего изменения системы координат. Нужно для того, чтобы
