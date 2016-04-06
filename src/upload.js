@@ -72,28 +72,28 @@
    * @return {boolean}
    */
   var resizeX = document.querySelector('#resize-x');
-   var resizeY = document.querySelector('#resize-y');
-   var resizeSize = document.querySelector('#resize-size');
-   var resiaeButton = document.querySelector('#resize-fwd'); 
+  var resizeY = document.querySelector('#resize-y');
+  var resizeSize = document.querySelector('#resize-size');
+  var resiaeButton = document.querySelector('#resize-fwd'); 
 
-   resizeX.min = 0;
-   resizeY.min = 0;
-   resizeSize.min = 0;
+  resizeX.min = 0;
+  resizeY.min = 0;
+  resizeSize.min = 0;
 
-   resizeX.value = 0;
-   resizeY.value = 0;
-   resizeSize.value = 0;
+  resizeX.value = 0;
+  resizeY.value = 0;
+  resizeSize.value = 0;
 
   function resizeFormIsValid() {    
-   var leftX = leftX + resizeX.value;
-   var topY = topY + resizeY.value;
-   var sideSize = sideSize + resizeSize.value;
-   var imageWidth = currentResizer._image.naturalWidth;
-   var imageHeight = currentResizer._image.naturalHeigth;
+    var leftX = leftX + resizeX.value;
+    var topY = topY + resizeY.value;
+    var sideSize = sideSize + resizeSize.value;
+    var imageWidth = currentResizer._image.naturalWidth;
+    var imageHeight = currentResizer._image.naturalHeigth;
   
-  if ( leftX + sideSize <= imageWidth && topY + sideSize <= imageHeight) {
-    return true;
-  }
+    if ( leftX + sideSize <= imageWidth && topY + sideSize <= imageHeight) {      
+      return true;
+    }
     
   }
 
