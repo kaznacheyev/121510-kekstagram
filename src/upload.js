@@ -74,29 +74,26 @@
   var resizeX = document.querySelector('#resize-x');
   var resizeY = document.querySelector('#resize-y');
   var resizeSize = document.querySelector('#resize-size');
-  var resiaeButton = document.querySelector('#resize-fwd'); 
+  var resizeButton = document.querySelector('.upload-form-controls-fwd');
+  var imgError = document.querySelector('.image-error');
 
   resizeX.min = 0;
   resizeY.min = 0;
   resizeSize.min = 0;
 
-  resizeX.value = 0;
-  resizeY.value = 0;
-  resizeSize.value = 0;
-
-  function resizeFormIsValid() {    
-    var leftX = leftX + resizeX.value;
-    var topY = topY + resizeY.value;
-    var sideSize = sideSize + resizeSize.value;
+  function resizeFormIsValid() {
+    var leftX += resizeX.value;
+    var topY += resizeY.value;
+    var sideSize += resizeSize.value;
     var imageWidth = currentResizer._image.naturalWidth;
     var imageHeight = currentResizer._image.naturalHeigth;
   
-    if ( leftX + sideSize <= imageWidth && topY + sideSize <= imageHeight) {      
+    if ((leftX + sideSize) <= imageWidth && (topY + sideSize) <= imageHeight) {
       return true;
+    } else {
+      return false;
     }
-    
-  }
-
+  };
 
   /**
    * Форма загрузки изображения.
@@ -222,6 +219,18 @@
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
+    }
+  };
+
+  resizeForm.onchange = function() {
+    if (resizeFormIsValid()) {
+      imgError.classList.add('invisible');
+      resizeButton.classList.remove('upload-form-controls-fwd:disabled');
+      resizeButton.removeAttribute('disabled');
+    } else {
+      imgError.classList.remove('invisible');
+      resizeButton.classList.add('upload-form-controls-fwd:disabled');
+      resizeButton.setAttribute('disabled', true);
     }
   };
 
