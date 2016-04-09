@@ -74,26 +74,29 @@
   var resizeX = document.querySelector('#resize-x');
   var resizeY = document.querySelector('#resize-y');
   var resizeSize = document.querySelector('#resize-size');
-  var resizeButton = document.querySelector('.upload-form-controls-fwd');
-  var imgError = document.querySelector('.image-error');
 
   resizeX.min = 0;
   resizeY.min = 0;
-  resizeSize.min = 0;
+  resizeSize.min = 10;
 
-  function resizeFormIsValid() {
-    var leftX += resizeX.value;
-    var topY += resizeY.value;
-    var sideSize += resizeSize.value;
-    var imageWidth = currentResizer._image.naturalWidth;
-    var imageHeight = currentResizer._image.naturalHeigth;
-  
-    if ((leftX + sideSize) <= imageWidth && (topY + sideSize) <= imageHeight) {
+  var resizeFormIsValid = function() {
+    var sizeSubmitButton = document.querySelector('#resize-fwd');
+    var imgError = document.querySelector('.image-error');
+    if (
+        ((parseInt(resizeX.value, 10) + parseInt(resizeSize.value, 10)) <= currentResizer._image.naturalWidth) &&
+        ((parseInt(resizeY.value, 10) + parseInt(resizeSize.value, 10)) <= currentResizer._image.naturalHeight)
+    ) {
+      sizeSubmitButton.disabled = false;
+      imgError.classList.add('invisible');
       return true;
     } else {
+      sizeSubmitButton.disabled = true;
+      imgError.classList.remove('invisible');
       return false;
     }
   };
+  resizeX.oninput = resizeY.oninput = resizeSize.oninput = resizeFormIsValid;
+
 
   /**
    * Форма загрузки изображения.
@@ -219,18 +222,6 @@
 
       resizeForm.classList.add('invisible');
       filterForm.classList.remove('invisible');
-    }
-  };
-
-  resizeForm.onchange = function() {
-    if (resizeFormIsValid()) {
-      imgError.classList.add('invisible');
-      resizeButton.classList.remove('upload-form-controls-fwd:disabled');
-      resizeButton.removeAttribute('disabled');
-    } else {
-      imgError.classList.remove('invisible');
-      resizeButton.classList.add('upload-form-controls-fwd:disabled');
-      resizeButton.setAttribute('disabled', true);
     }
   };
 
